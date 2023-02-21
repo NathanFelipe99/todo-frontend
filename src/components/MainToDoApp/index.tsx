@@ -1,7 +1,17 @@
+import { useEffect, useState } from "react";
+import { getTask } from "../../services/TaskService/task.service";
 import { ActionButton } from "../Button";
-import { Task } from "../Task";
+import { ITaskProps, Task } from "../Task";
 
 export default function MainToDoApp() {
+    const [tasks, setTasks] = useState<ITaskProps[]>([]);
+
+    useEffect(() => {
+        getTask().then((res) => {
+            setTasks(res);
+        });
+    }, []);
+
     return (
         <div className="bg-violet-900 flex h-screen justify-center items-center">
             <div className="bg-white p-20 w-10/12 rounded-xl">
@@ -12,7 +22,9 @@ export default function MainToDoApp() {
                     </div>
                 </div>
                 <div className="tasks flex justify-center flex-col mt-5 text-lg">
-                    <Task id="1" name="COMPRAR PÃO" />
+                    {tasks.length && tasks.map((task) => {
+                        return <Task key={task.id} id={task.id} name={task.name} />
+                    })}
                 </div>
             </div>
         </div>

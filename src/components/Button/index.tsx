@@ -31,10 +31,11 @@ export function ActionButton(props: IButtonProps) {
             buttonIcon = <MdDoneOutline />;
             break;
         default:
+            buttonProps += "hover:bg-black";
             break;
     }
 
     return (
-        <button name={props.type} className={buttonProps}>{buttonIcon}</button>
+        <button name={props.type} className={buttonProps}>{buttonIcon || ""}</button>
     );
 }

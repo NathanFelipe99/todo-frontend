@@ -1,6 +1,6 @@
 import { ActionButton } from '../Button';
 
-interface ITaskProps {
+export type ITaskProps = {
     id: string;
     name: string;
 }
@@ -14,8 +14,8 @@ export function Task(props: ITaskProps) {
                 {props.name}
             </div>
             <div className="actions flex w-full h-8 justify-end">
-                {buttons.map((type) => {
-                    return <ActionButton type={type} />
+                {buttons.map((type, index) => {
+                    return <ActionButton key={index + props.id} type={type} />
                 })}
             </div>
         </div>
