@@ -1,0 +1,40 @@
+import { MdDoneOutline, MdAdd } from 'react-icons/md';
+import { FaRegEdit, FaRegTrashAlt, FaRegSave } from 'react-icons/fa';
+
+interface IButtonProps {
+    type: string;
+}
+
+export function ActionButton(props: IButtonProps) {
+    let buttonProps = "bg-slate-500 mx-2 p-2 rounded ",
+        buttonIcon: JSX.Element | undefined;
+    
+    switch (props.type.toLowerCase()) {
+        case "add":
+            buttonProps += "hover:bg-blue-800";
+            buttonIcon = <MdAdd />;
+            break;
+        case "trash":
+            buttonProps += "hover:bg-red-600";
+            buttonIcon = <FaRegTrashAlt />
+            break; 
+        case "alt":
+            buttonProps += "hover:bg-orange-500";
+            buttonIcon = <FaRegEdit />;
+            break;
+        case "save":
+            buttonProps += "hover:bg-green-500 hidden";
+            buttonIcon = <FaRegSave />;
+            break;
+        case "finish":
+            buttonProps += "hover:bg-indigo-700";
+            buttonIcon = <MdDoneOutline />;
+            break;
+        default:
+            break;
+    }
+
+    return (
+        <button name={props.type} className={buttonProps}>{buttonIcon}</button>
+    );
+}
