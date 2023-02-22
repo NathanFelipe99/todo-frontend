@@ -3,20 +3,23 @@ import { FaRegEdit, FaRegTrashAlt, FaRegSave } from 'react-icons/fa';
 
 interface IButtonProps {
     type: string;
+    clickAction?: Function;
 }
 
 export function ActionButton(props: IButtonProps) {
     let buttonProps = "bg-slate-500 mx-2 p-2 rounded ",
-        buttonIcon: JSX.Element | undefined;
+        buttonIcon: JSX.Element | undefined,
+        buttonClickAction: Function;
+    const { type, clickAction } = props;
     
-    switch (props.type.toLowerCase()) {
+    switch (type.toLowerCase()) {
         case "add":
-            buttonProps += "hover:bg-blue-800";
-            buttonIcon = <MdAdd />;
+            buttonProps += "flex flex-col hover:bg-blue-800 w-1/6 justify-center items-center";
+            buttonIcon = <MdAdd fontSize="2rem" />;
             break;
         case "trash":
             buttonProps += "hover:bg-red-600";
-            buttonIcon = <FaRegTrashAlt />
+            buttonIcon = <FaRegTrashAlt />;
             break; 
         case "alt":
             buttonProps += "hover:bg-orange-500";
@@ -36,6 +39,6 @@ export function ActionButton(props: IButtonProps) {
     }
 
     return (
-        <button name={props.type} className={buttonProps}>{buttonIcon || ""}</button>
+        <button onClick={clickAction && clickAction()} name={type} className={buttonProps}>{buttonIcon}</button>
     );
 }
