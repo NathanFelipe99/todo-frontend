@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { MdAdd } from "react-icons/md";
 import { createTask, getTask } from "../../services/TaskService/task.service";
 import { ActionButton } from "../Button";
 import { ITaskProps, Task } from "../Task";
@@ -7,7 +6,7 @@ import { ITaskProps, Task } from "../Task";
 export default function MainToDoApp() {
     const [tasks, setTasks] = useState<ITaskProps[]>([]);
     const [newTask, setNewTask] = useState<string>("");
-    
+
     async function getAllTasks() {
         await getTask().then((res) => {
             setTasks(res);
@@ -39,10 +38,10 @@ export default function MainToDoApp() {
                 </div>
                 <div className="flex text-white mt-5 justify-between">
                     <input id="new-task-input" name="new-task-input" type="text" className="p-3 border-2 border-slate-400 rounded-lg w-5/6 text-violet-700 font-bold" onChange={(e) => setNewTask(e.target.value)} />
-                    
-                    <button onClick={createNewTask} className="bg-slate-500 mx-2 p-2 rounded flex flex-col hover:bg-blue-800 w-1/6 justify-center items-center"><MdAdd fontSize="2rem"/></button>
+                    {/* <button onClick={createNewTask} className="bg-slate-500 mx-2 p-2 rounded flex flex-col hover:bg-blue-800 w-1/6 justify-center items-center"><MdAdd fontSize="2rem" /></button> */}
+                    <ActionButton type="add" clickAction={createNewTask} />
                 </div>
             </div>
         </div>
     );
-}   
+}
